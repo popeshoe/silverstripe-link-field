@@ -6,7 +6,7 @@
  */
 class LinkFormField extends FormField {
 	
-	static $module_dir = 'silverstripe-link-field';
+	static $module_dir = 'link-field';
 	
 	/**
 	 * @var FormField
@@ -21,7 +21,8 @@ class LinkFormField extends FormField {
 	function __construct($name, $title = null, $value = null, $form = null) {
 		// naming with underscores to prevent values from actually being saved somewhere
 		$this->fieldCustomURL = new TextField("{$name}[CustomURL]", ' External URL: ');
-		$this->fieldPageID = new SimpleTreeDropdownField("{$name}[PageID]", '', 'SiteTree', '', null, "(External/Custom URL)");
+		$this->fieldPageID = new SimpleTreeDropdownField("{$name}[PageID]", "Title", "SiteTree", '', "Title", null, "(External/Custom URL)");
+		
 		parent::__construct($name, $title, $value, $form);
 	}
 	
@@ -36,7 +37,7 @@ class LinkFormField extends FormField {
 		"</div>";
 	}
 	
-	function setValue($val, $eh) {
+	function setValue($val) {
 //		Debug::dump($eh);
 //		Debug::backtrace();
 		$this->value = $val;
